@@ -124,7 +124,64 @@ class MetodosOrdenamiento{
 	}
 	
 	
+		
+	public void ordenamientoPorSeleccion (int [] numeros){
+		long TInicio, TFin, tiempo;
+		TInicio = System.currentTimeMillis();
+		int recorridos=0, intercambios=0, comparaciones=0;
+		for (int i=0; i<numeros.length; i++){
+		int minimo = i;
+		for (int j =0; j<numeros.length; j++){
+			if(numeros[j]<numeros[minimo]){
+			minimo = j;
+			intercambios++;
+			}
+		int aux = numeros[i];
+		numeros[i] = numeros[minimo];
+		numeros[minimo] = aux;
+		comparaciones++;
+			}
+		recorridos++;
+		}
+		
+		System.out.println(Arrays.toString(numeros));
+		System.out.println("Recorridos: " + recorridos);
+		System.out.println("Intercambios: " + intercambios);
+		System.out.println("Comparaciones: " + comparaciones);
+		TFin = System.currentTimeMillis();
+		 tiempo = TFin - TInicio; //Calculamos los milisegundos de diferencia
+		  System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);
+	}	
 	
+	
+	public void ordenamientoPorInsercion(int arreglo[]) {
+		long TInicio, TFin, tiempo;
+		TInicio = System.currentTimeMillis();
+		int recorridos=0, intercambios=0, comparaciones=0;
+		int aux =0;
+		
+		for (int i = 0; i < arreglo.length; i++) {
+			recorridos++;
+		aux = arreglo[i];
+		int j = i-1;
+		
+		while (j>=0 && aux <= arreglo[j]) {
+			arreglo[j+1] = arreglo[j];
+
+			comparaciones++;
+			j--;
+		}
+		arreglo[j+1] = aux;
+		intercambios++;
+		}
+		System.out.println(Arrays.toString(arreglo));
+		System.out.println("Intercambios: "+intercambios);
+		System.out.println("Comparaciones: "+comparaciones );
+		System.out.println("Recorridos: "+recorridos);
+		TFin = System.currentTimeMillis();
+		 tiempo = TFin - TInicio; //Calculamos los milisegundos de diferencia
+		  System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);
+	}
 }
 
 public class EjemploMetodosOrdenamiento {
@@ -146,7 +203,18 @@ public class EjemploMetodosOrdenamiento {
 		System.out.println("Burbuja 3");
 		mo.ordenamientoBurbuja3(arreglo);
 		
-	
+		System.out.println("================ ORDENAMIENTO POR SELECCION ===============");
+		System.out.println("Arreglo sin ordenar: " + Arrays.toString(arreglo));
+		System.out.println("Arreglo ordenado: ");
+		mo.ordenamientoPorSeleccion(numeros);
+		
+		
+		System.out.println("================= ORDENAMIENTO POR INSERCION ==============");
+		System.out.println("Arreglo sin ordenar: " + Arrays.toString(arreglo));
+		System.out.println("Arreglo ordenado: ");
+		mo.ordenamientoPorInsercion(lista);
+
+		
 	}
 
 }
