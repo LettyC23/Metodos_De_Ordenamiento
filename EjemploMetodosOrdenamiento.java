@@ -219,6 +219,52 @@ class MetodosOrdenamiento{
 			System.out.print(A[i] + ", ");
 		}
 	}
+	
+		public void ordenamientoQuickSort(int vector[], int izquierda, int derecha) {
+		int recorridos=0, intercambios = 0, comparaciones=0;
+		long TFin, TInicio, tiempo;
+		
+		TInicio = System.currentTimeMillis();
+		
+		int pivote = vector[izquierda];
+        int i = izquierda;
+        int j = derecha;
+        int auxIntercambio;
+        while (i < j) {
+            while (vector[i] <= pivote && i < j) {
+                i++;
+            }
+            while (vector[j] > pivote) {
+                j--;
+            }
+            if (i < j) {
+            	comparaciones ++;
+                auxIntercambio = vector[i];
+                vector[i] = vector[j];
+                vector[j] = auxIntercambio;
+                intercambios++;
+            }
+            
+        }
+        recorridos++;
+        vector[izquierda] = vector[j];
+        vector[j] = pivote;
+        intercambios++;
+        if (izquierda < j - 1) {
+        	ordenamientoQuickSort(vector, izquierda, j - 1);
+        }
+        if (j + 1 < derecha) {
+        	ordenamientoQuickSort(vector, j + 1, derecha);
+        }
+        
+        System.out.println(Arrays.toString(vector));
+        System.out.println("Recorridos: "+ recorridos);
+		System.out.println("Intercambios: " + intercambios);
+		System.out.println("Comparaciones: " + comparaciones);
+		TFin = System.currentTimeMillis();
+		 tiempo = TFin - TInicio; //Calculamos los milisegundos de diferencia
+		  System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);
+	}
 }
 
 public class EjemploMetodosOrdenamiento {
@@ -270,18 +316,46 @@ public class EjemploMetodosOrdenamiento {
 			vecS1[i] = new Random().nextInt(1000000);
 		}
 		System.out.println("Arreglo sin ordenar: " + Arrays.toString(A));
-		System.out.println("Arreglo ordenado arreglo 10 elementos : ");
+		System.out.println("Arreglo ordenado con 10 elementos : ");
 		mo.ordenamientoShellsort(A);
 		mo.mostarArreglo(A);
-		System.out.println("Arreglo ordenado arreglo 100 elementos : ");
+		System.out.println("Arreglo ordenado con 100 elementos : ");
 		mo.ordenamientoShellsort(vecS);
 		mo.mostarArreglo(vecS);
-		System.out.println("Arreglo ordenado arreglo 1000 elementos : ");
+		System.out.println("Arreglo ordenado con 1000 elementos : ");
 		mo.ordenamientoShellsort(vec);
 		mo.mostarArreglo(vec);
-		System.out.println("Arreglo ordenado arreglo 1000000 elementos : ");
+		System.out.println("Arreglo ordenado con 1000000 elementos : ");
 		mo.ordenamientoShellsort(vecS1);
 		mo.mostarArreglo(vecS1);
+		
+		
+			System.out.println("================= ORDENAMIENTO POR QuickSort =============== ");
+		int v[];
+		v = new int [100];
+		for (int i = 0; i < v.length; i++) {
+			v[i] = new Random().nextInt(100);
+		}
+		int vecQ[];
+		vecQ = new int [1000];
+		for (int i = 0; i < vecQ.length; i++) {
+			vecQ[i] = new Random().nextInt(1000);
+		}
+		int vecQ1[];
+		vecQ1 = new int [1000000];
+		for (int i = 0; i < vecQ1.length; i++) {
+			vecQ1[i] = new Random().nextInt(1000000);
+		}
+		int numerosQ [] = {34, 25, 12, 87, 9, 10, 34, 37, 24, 2};
+		System.out.println("Arreglo sin ordenar: " + Arrays.toString(numerosQ));
+		System.out.println("Arreglo ordenado con 10 elementos : ");
+		mo.ordenamientoQuickSort(numerosQ, 0 ,0);
+		System.out.println("Arreglo ordenado con 100 elementos : ");
+		mo.ordenamientoQuickSort(v,0 ,0);
+		System.out.println("Arreglo ordenado con 1000 elementos : ");
+		mo.ordenamientoQuickSort(vecQ,0 ,0);
+		System.out.println("Arreglo ordenado con 1000000 elementos : ");
+		mo.ordenamientoQuickSort(vecQ1,0 ,0);
 		
 	}
 
