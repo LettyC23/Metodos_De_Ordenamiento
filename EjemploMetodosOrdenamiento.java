@@ -182,6 +182,43 @@ class MetodosOrdenamiento{
 		 tiempo = TFin - TInicio; //Calculamos los milisegundos de diferencia
 		  System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);
 	}
+	
+	public void ordenamientoShellsort(int A[]) {
+		long TInicio, TFin, tiempo;
+		TInicio = System.currentTimeMillis();
+		int salto, aux,i;
+		boolean cambios;
+		int recorridos=0, intercambios=0,comparaciones=0;
+		for (salto = A.length/2; salto !=0; salto/=2) {
+			recorridos++;
+			cambios = true;
+			while (cambios) {
+				cambios = false;
+				for (i = salto; i < A.length; i++) {
+					if (A[i-salto]>A[i]) {
+						intercambios++;
+						aux= A[i];
+						A[i] = A[i-salto];
+						A[i-salto] = aux;
+						cambios = true;
+						
+					}comparaciones++;
+				}
+			}
+		}
+		System.out.println("Recorridos: "+ recorridos);
+		System.out.println("Intercambios: " + intercambios);
+		System.out.println("Comparaciones: " + comparaciones);
+		TFin = System.currentTimeMillis();
+		 tiempo = TFin - TInicio; //Calculamos los milisegundos de diferencia
+		  System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);
+	}
+	
+	public void mostarArreglo(int A[]) {
+		for (int i = 0; i < A.length; i++) {
+			System.out.print(A[i] + ", ");
+		}
+	}
 }
 
 public class EjemploMetodosOrdenamiento {
@@ -214,6 +251,37 @@ public class EjemploMetodosOrdenamiento {
 		System.out.println("Arreglo ordenado: ");
 		mo.ordenamientoPorInsercion(lista);
 
+		
+		System.out.println("================= ORDENAMIENTO POR SHELLSORT ==============");
+		int A [] = {34, 25, 12, 87, 9, 10, 34, 37, 24, 2};
+		int vecS[];
+		vecS = new int [100];
+		for (int i = 0; i < vecS.length; i++) {
+			vecS[i] = new Random().nextInt(100);
+		}
+		int vec[];
+		vec = new int [1000];
+		for (int i = 0; i < vec.length; i++) {
+			vec[i] = new Random().nextInt(1000);
+		}
+		int vecS1[];
+		vecS1 = new int [1000000];
+		for (int i = 0; i < vecS1.length; i++) {
+			vecS1[i] = new Random().nextInt(1000000);
+		}
+		System.out.println("Arreglo sin ordenar: " + Arrays.toString(A));
+		System.out.println("Arreglo ordenado arreglo 10 elementos : ");
+		mo.ordenamientoShellsort(A);
+		mo.mostarArreglo(A);
+		System.out.println("Arreglo ordenado arreglo 100 elementos : ");
+		mo.ordenamientoShellsort(vecS);
+		mo.mostarArreglo(vecS);
+		System.out.println("Arreglo ordenado arreglo 1000 elementos : ");
+		mo.ordenamientoShellsort(vec);
+		mo.mostarArreglo(vec);
+		System.out.println("Arreglo ordenado arreglo 1000000 elementos : ");
+		mo.ordenamientoShellsort(vecS1);
+		mo.mostarArreglo(vecS1);
 		
 	}
 
