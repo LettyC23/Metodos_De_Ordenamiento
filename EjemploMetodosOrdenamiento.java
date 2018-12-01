@@ -370,7 +370,7 @@ class MetodosOrdenamiento{
 				}catch(IOException e){
 					System.out.println("Error al cerrar el archivo");
 				}
-			}//Final del archivo3	
+			}
 		}
 
 	
